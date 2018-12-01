@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.2.61'
+}
+
+group 'com.c2v4'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile "org.jetbrains.kotlin:kotlin-test"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+
+    testCompile "io.cucumber:cucumber-java8:$cucumberVersion"
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version: cucumberVersion
+    testCompile group: 'io.cucumber', name: 'cucumber-picocontainer', version: cucumberVersion
+
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
+
+    testCompile "org.junit.platform:junit-platform-runner:$junitRunnerVersion"
+
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
