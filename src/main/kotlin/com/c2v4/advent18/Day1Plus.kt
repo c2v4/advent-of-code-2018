@@ -1,7 +1,7 @@
 package com.c2v4.advent18
 
 fun repeatedFrequency(input: String): Int {
-    val changes = input.replace("\r\n", "\n").split("\n").map { it.toInt() }
+    val changes = input.split(splitRegex).map { it.toInt() }
     val alreadyVisited = mutableSetOf(0)
     var current = 0
     var index = 0
