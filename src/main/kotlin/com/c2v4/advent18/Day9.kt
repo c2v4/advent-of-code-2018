@@ -1,29 +1,46 @@
 package com.c2v4.advent18
 
-fun marbleGame(input: String): Int = numberRegex.findAll(input).toList().let {
-    val players = it[0].value.toInt()
-    val lastMarble = it[1].value.toInt()
-    (1..lastMarble).fold(MarbleGameState(0, mutableListOf(0), 1, MutableList(players) { 0 })) { acc, i ->
+import java.util.*
+import kotlin.math.abs
+
+fun marbleGame(input: String): Long = numberRegex.findAll(input).toList().let { results ->
+    val players = results[0].value.toInt()
+    val lastMarble = results[1].value.toInt()
+    val board = LinkedList<Int>()
+    board.add(0)
+    val initial = MarbleGameState( board,  LongArray(players) { 0 })
+    var i = 1
+    while (i <= lastMarble) {
         if (i % 23 == 0) {
-            val toRemovePos =     (acc.lastMarblePos - 7+acc.board.size)%acc.board.size
-            acc.scores[acc.currentPlayer] =
-                acc.scores[acc.currentPlayer] + i + acc.board.removeAt(toRemovePos)
-            acc.lastMarblePos = toRemovePos
+            initial.board.rotate(-7)
+            initial.scores[i % players] += (i + initial.board.pop()).toLong()
         } else {
-            val newMarblePos = ((acc.lastMarblePos + 1) % acc.board.size)+1
-            acc.board.add(newMarblePos,i)
-            acc.lastMarblePos=newMarblePos
+            initial.board.rotate(2)
+            initial.board.addLast(i)
         }
-        acc.currentPlayer = (acc.currentPlayer + 1) % players
-        acc
-    }.scores.max() ?: 0
+        i++
+    }
+    initial.scores.max() ?: 0
+}
+
+fun <T> LinkedList<T>.rotate(num:Int){
+    if (num == 0) return
+    if (num > 0) {
+        (0 until num).forEach {
+            val t = this.removeLast()
+            this.addFirst(t)
+        }
+    } else {
+        (0 until (abs(num) -1)).forEach {
+            val t = this.remove()
+            this.addLast(t)
+        }
+    }
 }
 
 data class MarbleGameState(
-    var currentPlayer: Int,
-    val board: MutableList<Int>,
-    var lastMarblePos: Int,
-    val scores: MutableList<Int>
+    val board: LinkedList<Int>,
+    val scores: LongArray
 )
 
 fun main(args: Array<String>) {
