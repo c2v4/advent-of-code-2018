@@ -1,6 +1,6 @@
 package com.c2v4.advent18
 
-val numberRegex = Regex("\\d+")
+val numberRegex = Regex("[-+]?\\d+")
 fun overlappingFabric(input: String): Int {
     return input.split(splitRegex)
         .map {
