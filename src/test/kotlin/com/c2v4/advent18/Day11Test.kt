@@ -1,7 +1,6 @@
 package com.c2v4.advent18
 
 import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class Day11Test {
@@ -16,7 +15,7 @@ class Day11Test {
 
     @Test
     internal fun mostPowerfulTest() {
-        Assertions.assertThat(mostPowerfullGrid(18)).isEqualTo("33,45")
-        Assertions.assertThat(mostPowerfullGrid(42)).isEqualTo("21,61")
+        Assertions.assertThat(mostPowerfulGrid(18)).isEqualTo("33,45")
+        Assertions.assertThat(mostPowerfulGrid(42)).isEqualTo("21,61")
     }
 }

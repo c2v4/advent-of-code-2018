@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-jdk8', version: '0.30.2'
+
 
     compile group: 'org.agrona', name: 'Agrona', version: '0.9.1'
 
